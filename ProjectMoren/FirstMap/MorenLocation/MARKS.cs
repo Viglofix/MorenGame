@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -80,10 +81,75 @@ namespace ProjectMoren;
         Thread.Sleep(3000);
         FightingSystem.Fight(player, enemy, stat);
     }
+
     public static string GetEnemyName(IEnemy enemy)
     {
         Type objectType = enemy.GetType();
         string NameOfObject = objectType.Name;
         return NameOfObject;
     }
+
+    public void MARKSFight(Player player, Moren moren, Ges ges, PlayerEquipmentStatistics playerEq, QuestServices questService)
+    {
+        moren.MARKSEnterAgreement = true;
+        if (moren.MARKSEnterPossibility == true)
+        {
+            moren.MARKSBeginning(player, ges!, playerEq, questService!);
+        }
+        else if (moren.MARKSEnterPossibility == false && moren.DeathAgreement == false)
+        {
+            if (moren.MARKSAge >= 55)
+            {
+                object[] EnemiesObjectsArray = { new DziadekRumooplin(), new PanHeinzelin(), new PanMiliolin() };
+                Random random = new Random();
+                int luckyIndex = random.Next(0, EnemiesObjectsArray.Length);
+                object luckyObject = EnemiesObjectsArray[luckyIndex];
+
+                int[] randomWageArray = new int[] { 5, 10, 15 };
+                int indexOfWage = random.Next(0, randomWageArray.Length);
+
+                int randomWageArrayValue = randomWageArray[indexOfWage];
+
+                using (EnemiesBase enemy = luckyObject as EnemiesBase)
+                {
+                    moren.MARKSArena(player, enemy, playerEq);
+                    Console.WriteLine($"Wygrales pojedynek {moren.MARKSName}");
+
+                    Console.WriteLine("Zdobyles: " + randomWageArrayValue +"Moren");
+                    player.Moreny += randomWageArrayValue;
+                    Console.WriteLine("Twoje Moreny: " + player.Moreny);
+                    // enemyOne.Dispose(); Nalezy pamietac o tym, ze metoda ta jest wywolywana automatycznie w using, a uzywanie jej jawnie moze prowadzic do wycieku pamieci i nieprawidlowego zarzadzanania zasobow
+                }
+            }
+            else
+            {
+                // Tutaj beda trudniejsi przeciwnicy... 
+                object[] EnemiesObjectsArray = { new DziadekRumooplin(), new PanHeinzelin(), new PanMiliolin() };
+                Random random = new Random();
+                int luckyIndex = random.Next(0, EnemiesObjectsArray.Length);
+                object luckyObject = EnemiesObjectsArray[luckyIndex];
+
+
+                int[] randomWageArray = new int[] { 10, 15, 20 };
+                int indexOfWage = random.Next(0, randomWageArray.Length);
+                int randomWageArrayValue = randomWageArray[indexOfWage];
+
+                using (EnemiesBase enemy = luckyObject as EnemiesBase)
+                {
+                    moren.MARKSArena(player, enemy, playerEq);
+                    Console.WriteLine($"Wygrales pojedynek {moren.MARKSName}");
+
+                    Console.WriteLine("Zdobyles: " + randomWageArrayValue + "Moren");
+                    player.Moreny += randomWageArrayValue;
+                    Console.WriteLine("Twoje Moreny: " + player.Moreny);
+                    // enemyOne.Dispose(); Nalezy pamietac o tym, ze metoda ta jest wywolywana automatycznie w using, a uzywanie jej jawnie moze prowadzic do wycieku pamieci i nieprawidlowego zarzadzanania zasobow
+                }
+            }
+        }
+        else
+        {
+            Console.WriteLine("^BuchMajster: WYPAD PTASIMOZGU!");
+        }
+    }
+
     }

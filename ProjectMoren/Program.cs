@@ -37,6 +37,25 @@ public class Program
         graph.AddEdges(1, 2);
         graph.PrintGraph();
 
+        // || Moren Map Section
+
+        Graph graphMoren = new(6);
+        graphMoren.AddEdges(0, 1);
+        graphMoren.AddEdges(0, 2);
+        graphMoren.AddEdges(0, 3);
+        graphMoren.AddEdges(0, 4);
+        graphMoren.AddEdges(0, 5);
+        graphMoren.AddEdges(1, 2);
+        graphMoren.AddEdges(1, 3);
+        graphMoren.AddEdges(1, 4);
+        graphMoren.AddEdges(1, 5);
+        graphMoren.AddEdges(2, 3);
+        graphMoren.AddEdges(2, 4);
+        graphMoren.AddEdges(2, 5);
+        graphMoren.AddEdges(3, 4);
+        graphMoren.AddEdges(3, 5);
+        graphMoren.AddEdges(4, 5);
+
         // Serialization
         string playerSerialized;
         string morenSerialized;
@@ -84,12 +103,17 @@ public class Program
         // PlayersObcjest Section
         var player = new Player();
         var PlayerEq = new PlayerEquipmentStatistics();
+        var statistic = new StatisticsForItems();
         var ges = new Ges();
+        var allMorenLocations = new AllMorenLocations();
 
         // Game Working
         string q;
         int p;
+
         player.PlayerPosition = graph.getVertexIndex(0);
+        player.PlayerPositionMoren = graphMoren.getVertexIndex(0);
+
         var settings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
 
         // Preparing settings for player 
@@ -188,18 +212,10 @@ public class Program
             switch (q)
             {
                 case "map": player.PlayerMove(graph); break;
-                case "position":
-                    for (int i = 0; i < graph.TotalNumber - 1; i++)
-                    {
-                        
-                        switch (player.PlayerPosition[i])
-                        {
-                            case 0: Console.WriteLine("Mozes udac sie do Moren!!!"); break;
-                            case 1: Console.WriteLine("Mozesz udac sie do Jaskini Knuriona!!!"); break;
-                            case 2: Console.WriteLine("Mozesz udac sie do Lasu Druidow!!!"); break;
-                        }
-                    }
-                    break;
+                case "position": player.PlayerPositionSystem(player, graph); break;
+                case "moveSystem": player.PlayerMoveSystem(player, graph); break;
+                case "moveSystemMoren": allMorenLocations.PlayerMoveSystem(player, graphMoren); break;
+                case "positionSystemMoren": allMorenLocations.PlayerPositionSystemMoren(player, graphMoren); break;
                 case "save":
 
                     playerSerialized = JsonConvert.SerializeObject(player);
@@ -286,47 +302,7 @@ public class Program
             }
             if(player.PlayerPosition.SequenceEqual(graph.getVertexIndex(0)) && q == "MARKS")
             {
-                moren.MARKSEnterAgreement = true;
-                if (moren.MARKSEnterPossibility == true)
-                {
-                    moren.MARKSBeginning(player, ges!, PlayerEq, questService!);
-                }
-            else if (moren.MARKSEnterPossibility == false && moren.DeathAgreement == false) {
-                    if (moren.MARKSAge >= 55)
-                    {
-                        object[] EnemiesObjectsArray = { new DziadekRumooplin(), new PanHeinzelin(), new PanMiliolin() };
-                        Random random = new Random();
-                        int luckyIndex = random.Next(0, EnemiesObjectsArray.Length);
-                        object luckyObject = EnemiesObjectsArray[luckyIndex];
-
-                        using (EnemiesBase enemy = luckyObject as EnemiesBase)
-                        {
-                            moren.MARKSArena(player, enemy, PlayerEq);
-                            Console.WriteLine($"Wygrales pojedynek {moren.MARKSName}");
-                            // enemyOne.Dispose(); Nalezy pamietac o tym, ze metoda ta jest wywolywana automatycznie w using, a uzywanie jej jawnie moze prowadzic do wycieku pamieci i nieprawidlowego zarzadzanania zasobow
-                        }
-                    }
-                    else
-                    {
-                        // Tutaj beda trudniejsi przeciwnicy... 
-                        object[] EnemiesObjectsArray = { new DziadekRumooplin(), new PanHeinzelin(), new PanMiliolin() };
-                        Random random = new Random();
-                        int luckyIndex = random.Next(0, EnemiesObjectsArray.Length);
-                        object luckyObject = EnemiesObjectsArray[luckyIndex];
-
-                        using (EnemiesBase enemy = luckyObject as EnemiesBase)
-                        {
-                            moren.MARKSArena(player, enemy, PlayerEq);
-                            Console.WriteLine($"Wygrales pojedynek {moren.MARKSName}");
-                            // enemyOne.Dispose(); Nalezy pamietac o tym, ze metoda ta jest wywolywana automatycznie w using, a uzywanie jej jawnie moze prowadzic do wycieku pamieci i nieprawidlowego zarzadzanania zasobow
-                        }
-                    }
-                }
-                else
-                {
-                    Console.WriteLine("^BuchMajster: WYPAD PTASIMOZGU!");
-                }
-                
+                moren.MARKSFight(player, moren, ges, PlayerEq, questService);
             }
             if (player.PlayerPosition.SequenceEqual(graph.getVertexIndex(0)) && q == "Chief")
             {
@@ -334,8 +310,39 @@ public class Program
             } 
             if (player.PlayerPosition.SequenceEqual(graph.getVertexIndex(0)) && q == "MorenArmorShop")
             {
-                moren.Judaflin(player, questService, lemparsMutlaService);
+                moren.Judaflin(player, questService, lemparsMutlaService, PlayerEq, statistic);
             }
+
+            // I KNOW THAT IT IS A FUCKING CODE REDUNDANCY BUT WHO CARES
+            // This section is for the Moren Location movment and invoking things
+
+            if(q == "!enter")
+            {
+                if (player.PlayerPositionMoren.SequenceEqual(graphMoren.getVertexIndex(0)))
+                {
+                    moren.FiflinsShed(player, quest, questService, lemparsMutlaService);
+                }
+                if (player.PlayerPositionMoren.SequenceEqual(graphMoren.getVertexIndex(1)))
+                {
+                    moren.TitalinHouse(player, PlayerEq, ges, questService);
+                }
+                if (player.PlayerPositionMoren.SequenceEqual(graphMoren.getVertexIndex(2)))
+                {
+                }
+                if (player.PlayerPositionMoren.SequenceEqual(graphMoren.getVertexIndex(3)))
+                {
+                    moren.Judaflin(player, questService, lemparsMutlaService, PlayerEq, statistic);
+                }
+                if (player.PlayerPositionMoren.SequenceEqual(graphMoren.getVertexIndex(4)))
+                {
+                    moren.ChiefHome(player, questService);
+                } 
+                if (player.PlayerPositionMoren.SequenceEqual(graphMoren.getVertexIndex(5)))
+                {
+                    moren.MARKSFight(player, moren, ges, PlayerEq, questService);
+                }
+            }
+
         } while (q != "quit");
 
     }

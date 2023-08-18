@@ -13,15 +13,15 @@ namespace ProjectMoren
 
         public Shop()
         {
-            shop[0] = "++Wywar z Lumpaxowej Jagody {+20HP}";
-            shop[1] = "%%Mutla Lemparu {+10Charisma}";
-            shop[2] = "%%Mutla Lemparu {+10Charisma}";
-            shop[3] = "%%Mutla Lemparu {+10Charisma}";
-            shop[4] = "%%Mutla Lemparu {+10Charisma}";
-            shop[5] = "Miotla_Z_Badyli {&15Damage}";
+            shop[0] = "++Wywar z Lumpaxowej Jagody{+20HP} -20";
+            shop[1] = "%%Mutla Lemparu{+20Charisma} -10";
+            shop[2] = "%%Mutla Lemparu{+10Charisma} -5";   
+            shop[3] = "%%Mutla Lemparu{+10Charisma} -5";
+            shop[4] = "%%Mutla Lemparu{+10Charisma} -5";
+            shop[5] = "Miotla_Z_Badyli{&15Damage} -20";
         }
 
-        public void Judaflin(Player player, QuestServices questServices, LemparsMutlaService lemparsMutlaService)
+        public void Judaflin(Player player, QuestServices questServices, LemparsMutlaService lemparsMutlaService, PlayerEquipmentStatistics playerStats, StatisticsForItems statistic)
         {
             if(FirstTime == true)
             {
@@ -35,10 +35,11 @@ namespace ProjectMoren
             Console.WriteLine("^Judaflin: WIIIIITAJ FIFFFFLIIIINIE! CZYCZYMMM MOGE DLA CIEBIE SLUZYC ?");
             Thread.Sleep(2000);
             Console.WriteLine("^Fiflin: Sie zobaczy! \n");
-            Console.WriteLine("|++Wywar z Lumpaxowej Jagody {+20HP} -- 20 Morenow");
-            Console.WriteLine("|%%Mutla Lemparu {+10Charisma} -- 5 Morenow");
-            Console.WriteLine("|Miotla_Z_Badyli {&15Damage} -- 20 Morenow");
-            ShopTemplate.ShopMethod(shop, player, lemparsMutlaService);
+            Console.WriteLine("|++Wywar z Lumpaxowej Jagody {+20HP} -20Moren");
+            Console.WriteLine("|%%Mutla Lemparu {+10Charisma} -5Moren");
+            Console.WriteLine("|%%Mutla Lemparu {+20Charisma} -10Moren");
+            Console.WriteLine("|Miotla_Z_Badyli {&15Damage} -20Moren");
+            ShopTemplate.ShopMethod(shop, player, lemparsMutlaService, playerStats, statistic);
         }
     }
 }

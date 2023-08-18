@@ -19,8 +19,13 @@ public class Moren : Shed
     }
 
     [JsonConstructor]
-    public Moren(List<string> _shedItemsCopy, bool possibilityBasement, bool possibilityBasementZero, bool possibilityBasementTwo, bool possibilityBasementGoose, bool TitalinFightDone, bool possibilityBasementSafeOption, bool possibilityOneCopy, bool possibilityZeroCopy, Dictionary<int, string> toolsBoxCopy, bool MARKSEnterPossibilityCopy,  bool DeathAgreementCopy, bool NoAgreementToDeathPossibilityCopy)
+    public Moren(List<string> _shedItemsCopy, bool possibilityBasement, bool possibilityBasementZero, bool possibilityBasementTwo, bool possibilityBasementGoose, bool TitalinFightDone, bool possibilityBasementSafeOption, bool possibilityOneCopy, bool possibilityZeroCopy, Dictionary<int, string> toolsBoxCopy, bool MARKSEnterPossibilityCopy,  bool DeathAgreementCopy, bool NoAgreementToDeathPossibilityCopy, bool FirstTime, Dictionary<int, string> shop)
     {
+        // Shop 
+        base.FirstTime = FirstTime;
+        base.shop = new Dictionary<int, string>();
+        base.shop = shop;
+
         // MARKS
         MARKSEnterPossibility = MARKSEnterPossibilityCopy;
         DeathAgreement = DeathAgreementCopy;

@@ -104,6 +104,13 @@ namespace ProjectMoren
                     Console.WriteLine();
                 }
             }
+        }  
+        public static void GetBoxAllLonger(Dictionary<int, string> dic)
+        {
+            foreach(var item in dic)
+            {
+                Console.WriteLine(item.Key + ": " + item.Value + " ");
+            }
         }
     }
 }

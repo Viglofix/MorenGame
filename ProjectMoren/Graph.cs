@@ -5,6 +5,8 @@ public class Graph
     public int TotalNumber { get; set; }
     private List<int>[] Nodes { get; set; }
 
+    public List<int>[] NodesProp() => Nodes;
+
     public Graph(int number)
     { 
         TotalNumber = number;

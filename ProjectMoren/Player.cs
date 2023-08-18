@@ -6,14 +6,19 @@ using System.Threading.Tasks;
 using System.Runtime.CompilerServices;
 using Newtonsoft.Json;
 using System.Dynamic;
+using System.Numerics;
+using System.Security.Cryptography;
 
 namespace ProjectMoren
 {
     public class Player : PurseService
     {
         public List<int> PlayerPosition { get; set; }
+        public List<int> PlayerPositionMoren { get; set; }
         public Dictionary<int, string> Equipment = new Dictionary<int, string>().OrderBy(x => x.Key).ToDictionary(x => x.Key, x => x.Value);
         public int number { get; set; }
+        public string enterToLocation { get; set; }
+        private bool playerPositionFlag { get; set; } = true;
 
         // Stats Section
         public int Hp { get; set; } = 50;
@@ -140,6 +145,130 @@ namespace ProjectMoren
                 Console.WriteLine("Las Druidow!!!");
             }
            
+        }
+        public void PlayerMoveSystem(Player player, Graph graph)
+        {
+            ConsoleKeyInfo keyinfo;
+            ConsoleKeyInfo keyinfoTemp;
+            string? PlayerPositionMoren = "O";
+            string? PlayerPositionJaskinia = "O";
+            string? PlayerPositionLas = "O";
+            do
+            {
+                // Flag reset to prevent multiple statment execution
+                playerPositionFlag = true;
+
+                if (player.PlayerPosition.SequenceEqual(graph.getVertexIndex(0)))
+                {
+                    PlayerPositionMoren = "X";
+                }
+                else if (player.PlayerPosition.SequenceEqual(graph.getVertexIndex(1)))
+                {
+                    PlayerPositionJaskinia = "X";
+                }
+                else
+                {
+                    PlayerPositionLas = "X";
+                }
+
+                // Tutaj będzie pozycja gracza jako zmienna przekazana np jak tak
+
+                Console.WriteLine($"(Moren: {PlayerPositionMoren})-------(Jaskinia: {PlayerPositionJaskinia})");
+                Console.WriteLine("|                      |");
+                Console.WriteLine("|                      |");
+                Console.WriteLine("|                      |");
+                Console.WriteLine($"Las: ({PlayerPositionLas})");
+
+                if (player.PlayerPosition.SequenceEqual(graph.getVertexIndex(0)) && playerPositionFlag == true)
+                {
+                    Console.WriteLine("!Udaj sie do: ");
+                    keyinfoTemp = Console.ReadKey();
+                    if (keyinfoTemp.Key == ConsoleKey.DownArrow)
+                    {
+                        PlayerPositionMoren = "O";
+                        player.PlayerPosition = graph.getVertexIndex(2);
+                    }
+                    else if (keyinfoTemp.Key == ConsoleKey.RightArrow)
+                    {
+                        PlayerPositionMoren = "O";
+                        player.PlayerPosition = graph.getVertexIndex(1);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Tam sie kurwa nie ruszysz xD");
+                    }
+                    playerPositionFlag = false;
+                }
+
+                if (player.PlayerPosition.SequenceEqual(graph.getVertexIndex(1)) && playerPositionFlag == true)
+                {
+                    Console.WriteLine("!Udaj sie do: ");
+                    keyinfoTemp = Console.ReadKey();
+                    if (keyinfoTemp.Key == ConsoleKey.LeftArrow)
+                    {
+                        PlayerPositionJaskinia = "O";
+                        player.PlayerPosition = graph.getVertexIndex(0);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Tam sie kurwa nie ruszysz xD");
+                    }
+                    playerPositionFlag = false;
+                } 
+                if (player.PlayerPosition.SequenceEqual(graph.getVertexIndex(2)) && playerPositionFlag == true)
+                {
+                    Console.WriteLine("!Udaj sie do: ");
+                    keyinfoTemp = Console.ReadKey();
+                    if (keyinfoTemp.Key == ConsoleKey.UpArrow)
+                    {
+                        PlayerPositionLas = "O";
+                        player.PlayerPosition = graph.getVertexIndex(0);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Tam sie kurwa nie ruszysz xD");
+                    }
+                    playerPositionFlag = false;
+                }
+
+                Console.WriteLine("Jesli chcesz wyjsc to kliknij X | Jesli Nie to wszystko inne");
+                keyinfo = Console.ReadKey();
+
+            } while (keyinfo.Key != ConsoleKey.X);
+        }
+
+        public void PlayerPositionSystem(Player player, Graph graph)
+        {
+            for (int i = 0; i < graph.TotalNumber - 1; i++)
+            {
+
+                switch (player.PlayerPosition[i])
+                {
+                    case 0: Console.WriteLine("Mozes udac sie do Moren!!!"); break;
+                    case 1: Console.WriteLine("Mozesz udac sie do Jaskini Knuriona!!!"); break;
+                    case 2: Console.WriteLine("Mozesz udac sie do Lasu Druidow!!!"); break;
+                }
+            }
+        }
+        public List<int> PlayerPositionCurrent(Player player, Graph graph)
+        {
+            for (int i = 0; i < graph.TotalNumber - 1; i++)
+            {
+                if (player.PlayerPosition[i].Equals(graph.getVertexIndex(0)))
+                {
+                    return player.PlayerPosition;
+                }
+                else if (player.PlayerPosition[i].Equals(graph.getVertexIndex(1)))
+                {
+                    return player.PlayerPosition;
+                }
+                else
+                {
+                    return player.PlayerPosition;
+                }
+
+            }
+            return null;
         }
     }
 }

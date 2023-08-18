@@ -12,6 +12,7 @@ namespace ProjectMoren
         public int damage { get; set; }
         public int health { get; set; }
         public int mana { get; set; }
+        public int price { get; set; }
 
         public StatisticsDefinition()
         {
@@ -31,24 +32,24 @@ namespace ProjectMoren
          
         public StatisticsForItems() : base()
         {
-            Miotla = new List<StatisticsDefinition>() { new StatisticsDefinition() { damage = 5 } };
-            Swinka_Maskotka = new List<StatisticsDefinition>() { new StatisticsDefinition() { mana = 5 } };
-            Zardzewiala_Siekiera = new List<StatisticsDefinition>() { new StatisticsDefinition() { damage = 10 } };
-            Stary_Kubrak_Titalina = new List<StatisticsDefinition>() { new StatisticsDefinition() { health = 5 } };
-            Klucz_Do_Szopy_W_Lesie_Swietego_Fiflaxa = new List<StatisticsDefinition> { new StatisticsDefinition() { mana = 10 } };
-            Miotla_Z_Badyli = new List<StatisticsDefinition> { new StatisticsDefinition() { damage = 15 } };
+            Miotla = new List<StatisticsDefinition>() { new StatisticsDefinition() { damage = 5, price = 2 } };
+            Swinka_Maskotka = new List<StatisticsDefinition>() { new StatisticsDefinition() { mana = 5, price = 20 } };
+            Zardzewiala_Siekiera = new List<StatisticsDefinition>() { new StatisticsDefinition() { damage = 10, price = 10 } };
+            Stary_Kubrak_Titalina = new List<StatisticsDefinition>() { new StatisticsDefinition() { health = 5, price = 5 } };
+            Klucz_Do_Szopy_W_Lesie_Swietego_Fiflaxa = new List<StatisticsDefinition> { new StatisticsDefinition() { mana = 10, price = 2 } };
+            Miotla_Z_Badyli = new List<StatisticsDefinition> { new StatisticsDefinition() { damage = 15, price = 5 } };
         }
 
         public List<StatisticsDefinition> GetProperty(string property)
         {
             switch (property)
             {
-                case "Miotla": return Miotla; break;
-                case "Swinka_Maskotka": return Swinka_Maskotka; break;
-                case "Zardzewiala_Siekiera": return Zardzewiala_Siekiera; break;
-                case "Stary_Kubrak_Titalina": return Stary_Kubrak_Titalina; break;
-                case "Klucz_Do_Szopy_W_Lesie_Swietego_Fiflaxa": return Klucz_Do_Szopy_W_Lesie_Swietego_Fiflaxa; break;
-                case "Miotla_Z_Badyli": return Miotla_Z_Badyli; break;
+                case "Miotla": return Miotla;
+                case "Swinka_Maskotka": return Swinka_Maskotka;
+                case "Zardzewiala_Siekiera": return Zardzewiala_Siekiera;
+                case "Stary_Kubrak_Titalina": return Stary_Kubrak_Titalina;
+                case "Klucz_Do_Szopy_W_Lesie_Swietego_Fiflaxa": return Klucz_Do_Szopy_W_Lesie_Swietego_Fiflaxa;
+                case "Miotla_Z_Badyli": return Miotla_Z_Badyli;
             }
             return null;
         }
@@ -56,12 +57,12 @@ namespace ProjectMoren
         {
             switch (id)
             {
-                case 0: return Miotla; break;
-                case 1: return Swinka_Maskotka; break;
-                case 2: return Zardzewiala_Siekiera; break;
-                case 3: return Stary_Kubrak_Titalina; break;
-                case 4: return Klucz_Do_Szopy_W_Lesie_Swietego_Fiflaxa; break;
-                case 5: return Miotla_Z_Badyli; break;
+                case 0: return Miotla; 
+                case 1: return Swinka_Maskotka; 
+                case 2: return Zardzewiala_Siekiera;
+                case 3: return Stary_Kubrak_Titalina; 
+                case 4: return Klucz_Do_Szopy_W_Lesie_Swietego_Fiflaxa;
+                case 5: return Miotla_Z_Badyli;
 
             }
             return null;
@@ -69,12 +70,12 @@ namespace ProjectMoren
         {
             switch (id)
             {
-                case 0: return "Miotla"; break;
-                case 1: return "Swinka_Maskotka"; break;
-                case 2: return "Zardzewiala_Siekiera"; break;
-                case 3: return "Stary_Kubrak_Titalina"; break;
-                case 4: return "Klucz_Do_Szopy_W_Lesie_Swietego_Fiflaxa"; break;
-                case 5: return "Miotla_Z_Badyli"; break;
+                case 0: return "Miotla";
+                case 1: return "Swinka_Maskotka";
+                case 2: return "Zardzewiala_Siekiera";
+                case 3: return "Stary_Kubrak_Titalina";
+                case 4: return "Klucz_Do_Szopy_W_Lesie_Swietego_Fiflaxa";
+                case 5: return "Miotla_Z_Badyli";
             }
             return null;
         }
@@ -94,6 +95,23 @@ namespace ProjectMoren
                 return item.mana;
             }
             return default(int);
+        } 
+        public int ItemPriceFromStatisticForItems(List<StatisticsDefinition> prop)
+        {
+            try
+            {
+                foreach (var item in prop)
+                {
+                    return item.price;
+                }
+                return default(int);
+            }
+            catch (System.NullReferenceException ex)
+            {
+                Console.WriteLine("Prosze podac wartosc z zakresu ekwipunku");
+                return default(int);
+            }
+
         }
         //System.NullReferenceException:
         public int ItemDamageFromStatisticForItems(List<StatisticsDefinition> prop)
