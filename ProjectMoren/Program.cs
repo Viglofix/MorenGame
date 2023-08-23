@@ -9,7 +9,6 @@ namespace ProjectMoren;
    
 public class Program
 {
-
     [DllImport("kernel32.dll", ExactSpelling = true)]
     private static extern IntPtr GetConsoleWindow();
     private static IntPtr ThisConsole = GetConsoleWindow();
@@ -275,6 +274,7 @@ public class Program
                 case "questAdd": questService!.AddQuest("QuestTest1"); break;
                 case "questDelete": questService!.DeleteQuest(questService._quests.Count); break;
                 case "DrinkMutla": lemparsMutlaService!.DrinkMutlaAsync(player!, lemparsMutlaService.mutlas.Count); break;
+                case "timer": lemparsMutlaService!.GetMutlaTime(player!); break;
                 case "DrinkAdd": lemparsMutlaService!.Add(10); break;
                 case "DrinkDelete": Console.WriteLine(lemparsMutlaService!.DeleteMutla(lemparsMutlaService.mutlas.Count)); break;
                 case "GetAllMutlas": lemparsMutlaService!.GetAllMutlas(); break;

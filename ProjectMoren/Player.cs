@@ -25,6 +25,7 @@ namespace ProjectMoren
         public int? Charisma { get; set; } = 0;
         public int Moreny { get; set; } = 0;
         public int punch { get; set; } = 2;
+        public int MutlaTime { get; set; } = 0;
 
         public Player() : base()
         {

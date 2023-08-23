@@ -198,7 +198,6 @@
         {
             for (int i = 0; i < graphMoren.TotalNumber - 1; i++)
             {
-
                 switch (player.PlayerPositionMoren[i])
                 {
                     case 0: Console.WriteLine("Mozes udac sie do Moren"); break;

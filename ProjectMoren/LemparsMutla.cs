@@ -1,7 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Drawing.Text;
 using System.Linq;
+using System.Reflection.Emit;
+using System.Runtime.Remoting;
 using System.Text;
 using System.Threading.Tasks;
 using System.Timers;
@@ -28,6 +31,9 @@ namespace ProjectMoren
     {
         // pozostalosci po probie z "lock" private readonly object mutlasLock = new object();
         public List<LemparsMutla> mutlas { get; set; } = new();
+        private readonly object _SyncObj = new object();
+        private static int methodCounter = 0;
+
         public void Add(int number)
         {
             var newMutla = new LemparsMutla() { Id = GetLastIndex() + 1, Charisma = number };
@@ -81,9 +87,36 @@ namespace ProjectMoren
                     player.Charisma += mutla.Charisma;
                     mutlas.Remove(mutla);
                 }
-                else { await Console.Out.WriteLineAsync("Niestety, ale nie posiadasz zadnych Mutlii!"); }
-                await Task.Delay(30000);
+                else { await Console.Out.WriteLineAsync("Niestety, ale nie posiadasz zadnych Mutlii!"); return; }
+            
+            // This section is dedicated to the timer system
+            // At first we need to invoke new thread from the pool using
+            // the Task.Run method which takes an Action delegate and return new task 
+            // directly from our method.
+            // Next we have to declare a lock keyword to block another threads from the pool
+            // Then every single thread invoked by this Task will be able to done the given quest
+            // by calculating from 30 to zero every single invocation
+            // lock must be necessary with the await Task.Run because lock itself in that case is blocking a main thread itself
+            // so we arent able to do anything.
+
+            await Task.Run(() =>
+            {
+                lock (_SyncObj)
+                {
+                    player.MutlaTime = 30;
+                    while (player.MutlaTime != 0 || player.MutlaTime! > 0)
+                    {
+                        Thread.Sleep(1000);
+                        player.MutlaTime--;
+                    }
+                }
+            });
+           
             player.Charisma -= charismaPoints ?? 0;
+        }
+        public async Task GetMutlaTime(Player player)
+        {
+            await Task.Run(() => { Console.Out.WriteLineAsync("Zostalo ci mutlomocy: " + player.MutlaTime); }); 
         }
     }
 }
