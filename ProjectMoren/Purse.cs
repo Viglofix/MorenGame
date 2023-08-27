@@ -31,7 +31,7 @@ namespace ProjectMoren
        void AddPurseMoreny(int money);
        void AddPurseHP(int hp);
        void DeletePurseMoreny(int money);
-        void DeletePurseHP(int hp);
+       void DeletePurseHP(int hp);
     }
 
     public class PurseService : IPurseService

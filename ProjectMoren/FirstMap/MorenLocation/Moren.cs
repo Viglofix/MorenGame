@@ -1,7 +1,10 @@
 ﻿using System.Linq;
 using Newtonsoft.Json;
+using ProjectMoren.FirstMap.MorenLocation.Enemies;
+using ProjectMoren.Statistics;
+using ProjectMoren.Templates;
 
-namespace ProjectMoren;
+namespace ProjectMoren.FirstMap.MorenLocation;
 
 public class Moren : Shed
 {
@@ -19,7 +22,7 @@ public class Moren : Shed
     }
 
     [JsonConstructor]
-    public Moren(List<string> _shedItemsCopy, bool possibilityBasement, bool possibilityBasementZero, bool possibilityBasementTwo, bool possibilityBasementGoose, bool TitalinFightDone, bool possibilityBasementSafeOption, bool possibilityOneCopy, bool possibilityZeroCopy, Dictionary<int, string> toolsBoxCopy, bool MARKSEnterPossibilityCopy,  bool DeathAgreementCopy, bool NoAgreementToDeathPossibilityCopy, bool FirstTime, Dictionary<int, string> shop)
+    public Moren(List<string> _shedItemsCopy, bool possibilityBasement, bool possibilityBasementZero, bool possibilityBasementTwo, bool possibilityBasementGoose, bool TitalinFightDone, bool possibilityBasementSafeOption, bool possibilityOneCopy, bool possibilityZeroCopy, Dictionary<int, string> toolsBoxCopy, bool MARKSEnterPossibilityCopy, bool DeathAgreementCopy, bool NoAgreementToDeathPossibilityCopy, bool FirstTime, Dictionary<int, string> shop)
     {
         // Shop 
         base.FirstTime = FirstTime;
@@ -58,7 +61,7 @@ public class Moren : Shed
         string? enter;
         int enterInt;
 
-        if(questServices.GetQuestByName("Udaj sie do szopy {Home}") != null)
+        if (questServices.GetQuestByName("Udaj sie do szopy {Home}") != null)
         {
             questServices.DeleteQuest(questServices.GetQuestByName("Udaj sie do szopy {Home}").Id);
         }
@@ -305,7 +308,7 @@ public class Moren : Shed
                             }
                             else
                             {
-                                if(possibilityBasement == true && possibilityBasementZero == true && possibilityBasementTwo == true && possibilityBasementGoose == true && possibilityBasementSafeOption == true && TitalinFightDone == true)
+                                if (possibilityBasement == true && possibilityBasementZero == true && possibilityBasementTwo == true && possibilityBasementGoose == true && possibilityBasementSafeOption == true && TitalinFightDone == true)
                                 {
                                     if (enter == "yes" && possibilityBasement == true && possibilityBasementZero == true && possibilityBasementTwo == true)
                                     {

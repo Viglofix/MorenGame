@@ -1,6 +1,6 @@
-﻿namespace ProjectMoren;
+﻿namespace ProjectMoren.FirstMap.MorenLocation;
 
-    public class PlatformGame
-    {
-       
-    }
+public class PlatformGame
+{
+
+}

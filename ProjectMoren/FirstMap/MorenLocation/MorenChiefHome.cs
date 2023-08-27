@@ -1,15 +1,16 @@
-﻿using System;
+﻿using ProjectMoren.Templates;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProjectMoren
+namespace ProjectMoren.FirstMap.MorenLocation
 {
     public class MorenChiefHome : MARKS
     {
         public bool possibilityOne = true;
-        public bool possibilityZero= true;
+        public bool possibilityZero = true;
         public Dictionary<int, string> toolsBox = new Dictionary<int, string>() { { 0, null! }, { 1, null! }, { 2, null! }, { 3, null! }, { 4, null! }, { 5, null! }, { 6, null! }, { 7, null! }, { 8, null! } };
 
         public MorenChiefHome()
@@ -34,7 +35,7 @@ namespace ProjectMoren
 
             if (possibilityOne == true && possibilityZero == true)
             {
-                DialogueQuestion.ThreeHeroesTwo(1, "Wodz z oddali", "Skryba Penntilin z oddali", "To jest jakis absurd by Fiflaxy w kraju \n w ktorym nie dziala system emerytalny  \n chcialy zmniejszyc definicje bycia seniorem \n do 55 roku zycia, tylko dodaja mi bez przerwy roboty", "Trudno sie z Panem nie zgodzic Panie Wodzu, iscie smysny pomysl. \n Jednakze wasza Wodzowatosc ze swoja jakze ponad przecietna inteligencja \n upora sie z kolejnym problemem natury biurokratycznej...", "","");
+                DialogueQuestion.ThreeHeroesTwo(1, "Wodz z oddali", "Skryba Penntilin z oddali", "To jest jakis absurd by Fiflaxy w kraju \n w ktorym nie dziala system emerytalny  \n chcialy zmniejszyc definicje bycia seniorem \n do 55 roku zycia, tylko dodaja mi bez przerwy roboty", "Trudno sie z Panem nie zgodzic Panie Wodzu, iscie smysny pomysl. \n Jednakze wasza Wodzowatosc ze swoja jakze ponad przecietna inteligencja \n upora sie z kolejnym problemem natury biurokratycznej...", "", "");
                 Console.WriteLine("^Wodz: No no wiem wiem...");
 
                 Thread.Sleep(3000);

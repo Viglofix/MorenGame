@@ -98,6 +98,8 @@ namespace ProjectMoren
             // by calculating from 30 to zero every single invocation
             // lock must be necessary with the await Task.Run because lock itself in that case is blocking a main thread itself
             // so we arent able to do anything.
+            // We can't use await so we are not sure if the compiler doesnt avoid our Task before the the complshion
+            // 
 
             await Task.Run(() =>
             {

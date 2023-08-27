@@ -3,15 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ProjectMoren.FirstMap.MorenLocation.Enemies.EnemiesBaseAdultEntities;
 
-namespace ProjectMoren
+namespace ProjectMoren.FirstMap.MorenLocation.Enemies.EnemiesBaseElderyEntities
 {
     public class DziadekRumooplin : EnemiesBase, IDisposable
     {
-        public DziadekRumooplin() 
+        public DziadekRumooplin()
         {
             health = 10;
-            damage = 5;
+            damage = 2;
         }
     }
 }

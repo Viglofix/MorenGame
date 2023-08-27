@@ -1,11 +1,12 @@
-﻿using System;
+﻿using ProjectMoren.Statistics;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProjectMoren
+namespace ProjectMoren.Templates
 {
     public class ShopTemplate
     {
@@ -21,7 +22,7 @@ namespace ProjectMoren
             Console.WriteLine("buy == kupno, sell == sprzedarz, check == cena twoich itemow:");
 
             agreement = Console.ReadLine();
-            if(agreement == "check")
+            if (agreement == "check")
             {
                 playerStats.ComparePlayerEquipmentAndStatisticsForItemAndValuesPRICE(player, statistic);
             }
@@ -114,7 +115,7 @@ namespace ProjectMoren
                     string? MoneyToPay = itemFromDictionary.Remove(0, indexOfMoney + 1);
                     int MoneyToPayInt = int.Parse(MoneyToPay);
 
-                    itemFromDictionary = itemFromDictionary.Remove(indexOfBracket, (itemFromDictionary.Length) - indexOfBracket);
+                    itemFromDictionary = itemFromDictionary.Remove(indexOfBracket, itemFromDictionary.Length - indexOfBracket);
 
                     if (player.Moreny < 0 && player.Moreny == 0)
                     {
@@ -154,7 +155,7 @@ namespace ProjectMoren
 
                 do
                 {
-                    if(allows == false)
+                    if (allows == false)
                     {
                         player.IterateThroughTheEquipment();
                     }
@@ -181,7 +182,7 @@ namespace ProjectMoren
                             return;
                         }
                     }
-                    catch (System.Collections.Generic.KeyNotFoundException ex)
+                    catch (KeyNotFoundException ex)
                     {
                         Console.WriteLine("Podaj Kurwa wartosc z zakresu!");
                     }
@@ -201,8 +202,8 @@ namespace ProjectMoren
                             allows = true;
                         }
                     }
+                    player.AdjustDictionaryIndexes(player.Equipment);
                 } while (allows != true); ;
-
             }
         }
     }

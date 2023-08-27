@@ -1,6 +1,6 @@
-﻿namespace ProjectMoren
+﻿namespace ProjectMoren.FirstMap.MorenLocation
 {
-    public class AllMorenLocations 
+    public class AllMorenLocations
     {
         public bool playerPositionFlag { get; set; } = true;
 
@@ -31,11 +31,11 @@
                 {
                     PlayerPositionShed = "X";
                 }
-                else if(player.PlayerPositionMoren.SequenceEqual(graphMoren.getVertexIndex(3)))
+                else if (player.PlayerPositionMoren.SequenceEqual(graphMoren.getVertexIndex(3)))
                 {
                     PlayerPositionShop = "X";
                 }
-                else if(player.PlayerPositionMoren.SequenceEqual(graphMoren.getVertexIndex(4)))
+                else if (player.PlayerPositionMoren.SequenceEqual(graphMoren.getVertexIndex(4)))
                 {
                     PlayerPositionChiefHome = "X";
                 }
@@ -106,16 +106,16 @@
                         PlayerPositionShed = "O";
                         player.PlayerPositionMoren = graphMoren.getVertexIndex(0);
                     }
-                    else if(keyinfoTemp.Key == ConsoleKey.RightArrow)
+                    else if (keyinfoTemp.Key == ConsoleKey.RightArrow)
                     {
                         PlayerPositionShed = "O";
                         player.PlayerPositionMoren = graphMoren.getVertexIndex(3);
-                    } 
-                    else if(keyinfoTemp.Key == ConsoleKey.DownArrow)
+                    }
+                    else if (keyinfoTemp.Key == ConsoleKey.DownArrow)
                     {
                         PlayerPositionShed = "O";
                         player.PlayerPositionMoren = graphMoren.getVertexIndex(4);
-                    } 
+                    }
                     else
                     {
                         Console.WriteLine("Tam sie kurwa nie ruszysz xD");
@@ -160,13 +160,13 @@
                     {
                         PlayerPositionChiefHome = "O";
                         player.PlayerPositionMoren = graphMoren.getVertexIndex(5);
-                    } 
+                    }
                     else
                     {
                         Console.WriteLine("Tam sie kurwa nie ruszysz xD");
                     }
                     playerPositionFlag = false;
-                } 
+                }
                 if (player.PlayerPositionMoren.SequenceEqual(graphMoren.getVertexIndex(5)) && playerPositionFlag == true)
                 {
                     Console.WriteLine("!Udaj sie do: ");

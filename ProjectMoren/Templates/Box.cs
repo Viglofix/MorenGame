@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProjectMoren
+namespace ProjectMoren.Templates
 {
     public static class Box
     {
@@ -41,7 +41,7 @@ namespace ProjectMoren
                             Console.WriteLine("Niestety, ale w skrzynce nie odnaleziono takiego przedmiotu");
                         }
                     }
-                break;
+                    break;
                 case 1:
                     {
                         Console.WriteLine();
@@ -70,7 +70,7 @@ namespace ProjectMoren
                             Console.WriteLine("Niestety, ale nie posiadasz danego przedmiotu w ekwipunku, lub tez wybrales zajete miejsce w box");
                         }
                     }
-                break;
+                    break;
                 default: Console.WriteLine("Lepiej sie zdecyduj, bo juz mnie wkurwia ten kod"); break;
             }
             player.AdjustDictionaryIndexes(player.Equipment);
@@ -88,26 +88,26 @@ namespace ProjectMoren
         }
         public static void GetBoxAll(Dictionary<int, string> dic)
         {
-            foreach(var item in dic)
+            foreach (var item in dic)
             {
                 Console.Write(item.Key + ": " + item.Value + " ");
-                if(item.Key == 2)
+                if (item.Key == 2)
                 {
                     Console.WriteLine();
                 }
-                if(item.Key == 5)
+                if (item.Key == 5)
                 {
                     Console.WriteLine();
                 }
-                if(item.Key == 8)
+                if (item.Key == 8)
                 {
                     Console.WriteLine();
                 }
             }
-        }  
+        }
         public static void GetBoxAllLonger(Dictionary<int, string> dic)
         {
-            foreach(var item in dic)
+            foreach (var item in dic)
             {
                 Console.WriteLine(item.Key + ": " + item.Value + " ");
             }

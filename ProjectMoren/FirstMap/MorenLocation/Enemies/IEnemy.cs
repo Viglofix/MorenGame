@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProjectMoren
+namespace ProjectMoren.FirstMap.MorenLocation.Enemies
 {
     public interface IEnemy
     {

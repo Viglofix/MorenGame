@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProjectMoren
+namespace ProjectMoren.Statistics
 {
     public class StatisticsDefinition
     {
@@ -29,7 +29,7 @@ namespace ProjectMoren
         public List<StatisticsDefinition> Klucz_Do_Szopy_W_Lesie_Swietego_Fiflaxa { get; set; }
         public List<StatisticsDefinition> Miotla_Z_Badyli { get; set; }
 
-         
+
         public StatisticsForItems() : base()
         {
             Miotla = new List<StatisticsDefinition>() { new StatisticsDefinition() { damage = 5, price = 2 } };
@@ -57,16 +57,17 @@ namespace ProjectMoren
         {
             switch (id)
             {
-                case 0: return Miotla; 
-                case 1: return Swinka_Maskotka; 
+                case 0: return Miotla;
+                case 1: return Swinka_Maskotka;
                 case 2: return Zardzewiala_Siekiera;
-                case 3: return Stary_Kubrak_Titalina; 
+                case 3: return Stary_Kubrak_Titalina;
                 case 4: return Klucz_Do_Szopy_W_Lesie_Swietego_Fiflaxa;
                 case 5: return Miotla_Z_Badyli;
 
             }
             return null;
-        }public string GetPropertyStringName(int id)
+        }
+        public string GetPropertyStringName(int id)
         {
             switch (id)
             {
@@ -86,7 +87,7 @@ namespace ProjectMoren
             {
                 return item.health;
             }
-            return default(int);
+            return default;
         }
         public int ItemManaFromStatisticForItems(List<StatisticsDefinition> prop)
         {
@@ -94,8 +95,8 @@ namespace ProjectMoren
             {
                 return item.mana;
             }
-            return default(int);
-        } 
+            return default;
+        }
         public int ItemPriceFromStatisticForItems(List<StatisticsDefinition> prop)
         {
             try
@@ -104,12 +105,12 @@ namespace ProjectMoren
                 {
                     return item.price;
                 }
-                return default(int);
+                return default;
             }
-            catch (System.NullReferenceException ex)
+            catch (NullReferenceException ex)
             {
                 Console.WriteLine("Prosze podac wartosc z zakresu ekwipunku");
-                return default(int);
+                return default;
             }
 
         }
@@ -123,17 +124,17 @@ namespace ProjectMoren
                     return item.damage;
                 }
             }
-            catch(System.NullReferenceException ex)
+            catch (NullReferenceException ex)
             {
                 Console.WriteLine("Prosze podac wartosc z zakresu ekwipunku");
-                return default(int);
+                return default;
             }
-            return default(int);
+            return default;
         }
 
         public IEnumerator<StatisticsDefinition> GetEnumerator()
         {
-            foreach(var item in this)
+            foreach (var item in this)
             {
                 yield return item;
             }

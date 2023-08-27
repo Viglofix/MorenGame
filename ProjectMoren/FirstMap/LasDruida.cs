@@ -1,1 +1,1 @@
-namespace ProjectMoren;
+namespace ProjectMoren.FirstMap;

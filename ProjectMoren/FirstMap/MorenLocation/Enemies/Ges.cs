@@ -4,13 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
-namespace ProjectMoren; 
+using ProjectMoren.FirstMap.MorenLocation.Enemies.EnemiesBaseElderyEntities;
 
-    public class Ges : EnemiesBase
+namespace ProjectMoren.FirstMap.MorenLocation.Enemies;
+
+public class Ges : EnemiesBase
+{
+    public Ges()
     {
-        public Ges()
-        {
         health = 20;
         damage = 10;
-         }
     }
+}

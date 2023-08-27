@@ -1,25 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace ProjectMoren.FirstMap.MorenLocation.Enemies.EnemiesBaseAdultEntities;
 
-namespace ProjectMoren;
-
-public class EnemiesBase : IEnemy, IDisposable
+public class EnemisBaseAdult : IEnemy, IDisposable
 {
     public int damage { get; set; }
     public int health { get; set; }
 
     public static int counter = 0;
 
-    public EnemiesBase()
+    public EnemisBaseAdult()
     {
         counter++;
         health = 0;
         damage = 0;
     }
-    ~EnemiesBase()
+    ~EnemisBaseAdult()
     {
         counter--;
     }
@@ -29,4 +23,3 @@ public class EnemiesBase : IEnemy, IDisposable
         counter--;
     }
 }
-

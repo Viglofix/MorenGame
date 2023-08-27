@@ -1,10 +1,12 @@
-﻿using System;
+﻿using ProjectMoren.Statistics;
+using ProjectMoren.Templates;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProjectMoren
+namespace ProjectMoren.FirstMap.MorenLocation
 {
     public class Shop
     {
@@ -13,17 +15,20 @@ namespace ProjectMoren
 
         public Shop()
         {
-            shop[0] = "++Wywar z Lumpaxowej Jagody{+20HP} -20";
+            shop[0] = "++Wywar z Lumpaxowej Jagody{+20HP} -10";
             shop[1] = "%%Mutla Lemparu{+20Charisma} -10";
-            shop[2] = "%%Mutla Lemparu{+10Charisma} -5";   
+            shop[2] = "%%Mutla Lemparu{+10Charisma} -5";
             shop[3] = "%%Mutla Lemparu{+10Charisma} -5";
             shop[4] = "%%Mutla Lemparu{+10Charisma} -5";
             shop[5] = "Miotla_Z_Badyli{&15Damage} -20";
+            shop[6] = "++Wywar z Lumpaxowej Jagody{+20HP} -10";
+            shop[7] = "++Wywar z Lumpaxowej Jagody{+20HP} -10";
+
         }
 
         public void Judaflin(Player player, QuestServices questServices, LemparsMutlaService lemparsMutlaService, PlayerEquipmentStatistics playerStats, StatisticsForItems statistic)
         {
-            if(FirstTime == true)
+            if (FirstTime == true)
             {
                 if (questServices.GetQuestByName("Odwiedz Sklep {MorenArmorShop}") != null)
                 {

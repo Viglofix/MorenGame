@@ -4,9 +4,14 @@ using System.Media;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using Castle.DynamicProxy;
+using ProjectMoren.FirstMap.MorenLocation.Enemies.EnemiesBaseElderyEntities;
+using ProjectMoren.Templates;
+using ProjectMoren.FirstMap.MorenLocation.Enemies;
+using ProjectMoren.FirstMap.MorenLocation;
+using ProjectMoren.Statistics;
 
-namespace ProjectMoren; 
-   
+namespace ProjectMoren;
+
 public class Program
 {
     [DllImport("kernel32.dll", ExactSpelling = true)]
@@ -139,7 +144,7 @@ public class Program
                         //Thread.Sleep(2000);
                         //Console.WriteLine("^Fiflin: Patrz ktos tam idzie Hrumlinie!");
                         //Thread.Sleep(2000);
-                        //Console.WriteLine("^Popilin: Sluchaj Fiflinie ! Jesli nie oddasz mi pieniedzy za te 10 mutli lemparu {50Morenow}, ktore wypisles \n na ostatnim Morenskim Ognisku Narodowym z mojego portfela to obiecuje ci, ze obudzisz sie bez glowy \n czyli w sumie sie nie obudzisz... A ta twoja swinia zostaie przerobiona na schabowe");
+                        //Console.WriteLine("^Popilin: Sluchaj Fiflinie ! Jesli nie oddasz mi pieniedzy za te 10 mutli lemparu {100Morenow}, ktore wypisles \n na ostatnim Morenskim Ognisku Narodowym z mojego portfela to obiecuje ci, ze obudzisz sie bez glowy \n czyli w sumie sie nie obudzisz... A ta twoja swinia zostaie przerobiona na schabowe");
                         //Thread.Sleep(2000);
                         //Console.WriteLine("^Hrumlin: :O");
                         //Thread.Sleep(2000);
@@ -161,6 +166,7 @@ public class Program
                         //Console.WriteLine("!Mozesz udac sie do Wodza Moren {Chief}. Za pomoca polecenia quest mozesz sprawdzic aktualna liste zadan!");
                         questService.AddQuest("Udaj sie do szopy {Home}");
                         questService.AddQuest("Udaj sie do Wodza {Chief}");
+                        questService.AddQuest("Glowny Cel: Oddaj 100Morenow {PopilinBasement}");
 
                         break;
                     case 2:
@@ -210,6 +216,8 @@ public class Program
             q = Console.ReadLine();
             switch (q)
             {
+                case "PopilinBasement": if(player.Moreny >= 100) { player.Moreny -= 100; Console.WriteLine("Tutaj bedzie dalszy watek"); }; break;
+
                 case "map": player.PlayerMove(graph); break;
                 case "position": player.PlayerPositionSystem(player, graph); break;
                 case "moveSystem": player.PlayerMoveSystem(player, graph); break;

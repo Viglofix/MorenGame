@@ -4,22 +4,27 @@ using System.Linq;
 using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
+using ProjectMoren.FirstMap.MorenLocation.Enemies;
+using ProjectMoren.FirstMap.MorenLocation.Enemies.EnemiesBaseAdultEntities;
+using ProjectMoren.FirstMap.MorenLocation.Enemies.EnemiesBaseElderyEntities;
+using ProjectMoren.Statistics;
+using ProjectMoren.Templates;
 
-namespace ProjectMoren;
+namespace ProjectMoren.FirstMap.MorenLocation;
 
-    public class MARKS : Shop
-    {
-       public bool MARKSEnterPossibility { get; set; } = true;
-       public bool DeathAgreement { get; set; } = true;
-       public bool NoAgreementToDeathPossibility { get; set; } = true;
-       public bool MARKSEnterAgreement { get; set; } = true;
+public class MARKS : Shop
+{
+    public bool MARKSEnterPossibility { get; set; } = true;
+    public bool DeathAgreement { get; set; } = true;
+    public bool NoAgreementToDeathPossibility { get; set; } = true;
+    public bool MARKSEnterAgreement { get; set; } = true;
 
-       
-       public string MARKSName { get; set; } 
-       public int MARKSAge { get; set; } 
-       
-       string agreement;
-       bool intAgreement;
+
+    public string MARKSName { get; set; }
+    public int MARKSAge { get; set; }
+
+    string agreement;
+    bool intAgreement;
 
     public void MARKSBeginning(Player player, IEnemy enemy, PlayerEquipmentStatistics stat, QuestServices questServices)
     {
@@ -74,7 +79,7 @@ namespace ProjectMoren;
                 }
             }
         }
-       }
+    }
     public void MARKSArena(Player player, IEnemy enemy, PlayerEquipmentStatistics stat)
     {
         Console.WriteLine($"WLASNIE TOCZYSZ POJEDYNEK Z {GetEnemyName(enemy)}");
@@ -115,7 +120,7 @@ namespace ProjectMoren;
                     moren.MARKSArena(player, enemy, playerEq);
                     Console.WriteLine($"Wygrales pojedynek {moren.MARKSName}");
 
-                    Console.WriteLine("Zdobyles: " + randomWageArrayValue +"Moren");
+                    Console.WriteLine("Zdobyles: " + randomWageArrayValue + "Moren");
                     player.Moreny += randomWageArrayValue;
                     Console.WriteLine("Twoje Moreny: " + player.Moreny);
                     // enemyOne.Dispose(); Nalezy pamietac o tym, ze metoda ta jest wywolywana automatycznie w using, a uzywanie jej jawnie moze prowadzic do wycieku pamieci i nieprawidlowego zarzadzanania zasobow
@@ -124,17 +129,17 @@ namespace ProjectMoren;
             else
             {
                 // Tutaj beda trudniejsi przeciwnicy... 
-                object[] EnemiesObjectsArray = { new DziadekRumooplin(), new PanHeinzelin(), new PanMiliolin() };
+                object[] EnemiesObjectsArray = { new Voxenfix(), new Hamerlin(), new GombaShin() };
                 Random random = new Random();
                 int luckyIndex = random.Next(0, EnemiesObjectsArray.Length);
                 object luckyObject = EnemiesObjectsArray[luckyIndex];
 
 
-                int[] randomWageArray = new int[] { 10, 15, 20 };
+                int[] randomWageArray = new int[] { 15, 20, 30 };
                 int indexOfWage = random.Next(0, randomWageArray.Length);
                 int randomWageArrayValue = randomWageArray[indexOfWage];
 
-                using (EnemiesBase enemy = luckyObject as EnemiesBase)
+                using (EnemisBaseAdult enemy = luckyObject as EnemisBaseAdult)
                 {
                     moren.MARKSArena(player, enemy, playerEq);
                     Console.WriteLine($"Wygrales pojedynek {moren.MARKSName}");
@@ -152,4 +157,4 @@ namespace ProjectMoren;
         }
     }
 
-    }
+}

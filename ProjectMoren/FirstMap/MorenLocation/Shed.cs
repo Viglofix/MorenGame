@@ -5,7 +5,7 @@ using System.Text;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
-namespace ProjectMoren;
+namespace ProjectMoren.FirstMap.MorenLocation;
 
 public class Shed : MorenChiefHome
 {
