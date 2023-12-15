@@ -1,0 +1,57 @@
+{
+  "playerObject": {
+    "PlayerPosition": [
+      1,
+      2
+    ],
+    "PlayerPositionMoren": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "equipment": {
+      "0": "Miotla",
+      "1": "Swinka_Maskotka",
+      "2": "Zardzewiala_Siekiera"
+    },
+    "number": 0,
+    "enterToLocation": null,
+    "Hp": 50,
+    "Charisma": 0,
+    "Moreny": 0,
+    "punch": 2,
+    "MutlaTime": 0
+  },
+  "moren": {
+    "_shedItems": [],
+    "MARKSEnterPossibility": true,
+    "DeathAgreement": true,
+    "NoAgreementToDeathPossibility": true,
+    "MARKSEnterAgreement": true,
+    "MARKSName": null,
+    "MARKSAge": 0
+  },
+  "ges": {
+    "damage": 10,
+    "health": 20
+  },
+  "questService": {
+    "_quests": [
+      {
+        "Id": 2,
+        "Name": "Udaj sie do Wodza {Chief}"
+      },
+      {
+        "Id": 3,
+        "Name": "Glowny Cel: Oddaj 100Morenow {PopilinBasement}"
+      }
+    ],
+    "Id": 0,
+    "Name": null
+  },
+  "lemparsMutlaService": {
+    "mutlas": []
+  }
+}

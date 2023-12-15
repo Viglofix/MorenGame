@@ -1,17 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Drawing.Text;
-using System.Linq;
-using System.Reflection.Emit;
-using System.Runtime.Remoting;
-using System.Text;
-using System.Threading.Tasks;
-using System.Timers;
-using System.Windows.Markup;
-
-namespace ProjectMoren
-{
+﻿namespace GameObjects;
     public class LemparsMutla 
     {
         public int Id { get; set; }
@@ -23,11 +10,7 @@ namespace ProjectMoren
             return $"{Charisma}";
         }
     }
-    public interface ILemparsMutlaService
-    {
-        public async Task DrinkMutlaAsync() {}
-    }
-    public class LemparsMutlaService : ILemparsMutlaService
+    public class LemparsMutlaService
     {
         // pozostalosci po probie z "lock" private readonly object mutlasLock = new object();
         public List<LemparsMutla> mutlas { get; set; } = new();
@@ -78,9 +61,9 @@ namespace ProjectMoren
             return true;
         }
 
-        public async Task DrinkMutlaAsync(Player player, int id)
+        public async Task DrinkMutlaAsync(PlayerObject player, int id)
         {
-            int? charismaPoints = id != 0 ? GetMutlasById(id).Charisma : null;
+            int? charismaPoints = id != 0 ? GetMutlasById(id)!.Charisma : null;
             var mutla = GetMutlasById(id);
                 if (mutla != null)
                 {
@@ -116,9 +99,8 @@ namespace ProjectMoren
            
             player.Charisma -= charismaPoints ?? 0;
         }
-        public async Task GetMutlaTime(Player player)
+        public async Task GetMutlaTime(PlayerObject player)
         {
             await Task.Run(() => { Console.Out.WriteLineAsync("Zostalo ci mutlomocy: " + player.MutlaTime); }); 
         }
     }
-}

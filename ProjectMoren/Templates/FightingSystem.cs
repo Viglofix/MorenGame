@@ -1,19 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
-using System.Reflection;
-using System.Dynamic;
-using ProjectMoren.FirstMap.MorenLocation.Enemies;
-using ProjectMoren.Statistics;
+﻿using ProjectMoren.FirstMap.MorenLocation.Enemies;
+using GameObjects;
+using ProjectMoren.StaticClasses;
 
 namespace ProjectMoren.Templates;
 
 public static class FightingSystem
 {
-    public static void Fight(Player player, IEnemy enemy, PlayerEquipmentStatistics playerStats)
+    public static void Fight(PlayerObject player, IEnemy enemy, PlayerEquipmentStatistics playerStats)
     {
         string? agreement;
         bool indexAgreement;

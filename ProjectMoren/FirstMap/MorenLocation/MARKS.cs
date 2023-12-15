@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
+﻿using GameObjects;
+using GameObjects.BasicGameMechanisms;
 using ProjectMoren.FirstMap.MorenLocation.Enemies;
 using ProjectMoren.FirstMap.MorenLocation.Enemies.EnemiesBaseAdultEntities;
 using ProjectMoren.FirstMap.MorenLocation.Enemies.EnemiesBaseElderyEntities;
-using ProjectMoren.Statistics;
+using ProjectMoren.StaticClasses;
 using ProjectMoren.Templates;
 
 namespace ProjectMoren.FirstMap.MorenLocation;
@@ -26,7 +22,7 @@ public class MARKS : Shop
     string agreement;
     bool intAgreement;
 
-    public void MARKSBeginning(Player player, IEnemy enemy, PlayerEquipmentStatistics stat, QuestServices questServices)
+    public void MARKSBeginning(PlayerObject player, IEnemy enemy, PlayerEquipmentStatistics stat, QuestService questServices)
     {
         if (MARKSEnterPossibility == true && DeathAgreement == true)
         {
@@ -80,7 +76,7 @@ public class MARKS : Shop
             }
         }
     }
-    public void MARKSArena(Player player, IEnemy enemy, PlayerEquipmentStatistics stat)
+    public void MARKSArena(PlayerObject player, IEnemy enemy, PlayerEquipmentStatistics stat)
     {
         Console.WriteLine($"WLASNIE TOCZYSZ POJEDYNEK Z {GetEnemyName(enemy)}");
         Thread.Sleep(3000);
@@ -94,7 +90,7 @@ public class MARKS : Shop
         return NameOfObject;
     }
 
-    public void MARKSFight(Player player, Moren moren, Ges ges, PlayerEquipmentStatistics playerEq, QuestServices questService)
+    public void MARKSFight(PlayerObject player, Moren moren, Ges ges, PlayerEquipmentStatistics playerEq, QuestService questService)
     {
         moren.MARKSEnterAgreement = true;
         if (moren.MARKSEnterPossibility == true)

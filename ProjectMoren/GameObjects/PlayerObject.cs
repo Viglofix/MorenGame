@@ -1,24 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Runtime.CompilerServices;
-using Newtonsoft.Json;
-using System.Dynamic;
-using System.Numerics;
-using System.Security.Cryptography;
+﻿using System.Text.Json.Serialization;
 
-namespace ProjectMoren
-{
-    public class Player : PurseService
+namespace GameObjects;
+    public class PlayerObject
     {
         public List<int> PlayerPosition { get; set; }
         public List<int> PlayerPositionMoren { get; set; }
-        public Dictionary<int, string> Equipment = new Dictionary<int, string>().OrderBy(x => x.Key).ToDictionary(x => x.Key, x => x.Value);
+        [JsonPropertyName("equipment")]
+        public Dictionary<int, string> Equipment {get;set;}
         public int number { get; set; }
         public string enterToLocation { get; set; }
         private bool playerPositionFlag { get; set; } = true;
+        
+        [JsonConstructor]
+        public PlayerObject(Dictionary<int,string> equipment){
+            Equipment = equipment ?? new Dictionary<int, string>();
+        }
+        public PlayerObject() {
+            Equipment = new();
+        }
 
         // Stats Section
         public int Hp { get; set; } = 50;
@@ -26,11 +25,6 @@ namespace ProjectMoren
         public int Moreny { get; set; } = 0;
         public int punch { get; set; } = 2;
         public int MutlaTime { get; set; } = 0;
-
-        public Player() : base()
-        {
-        }
-
         public int GetHp() => Hp;
         public int? GetCharism() => Charisma;
         public int GetMoreny() => Moreny;
@@ -46,22 +40,10 @@ namespace ProjectMoren
 
         // Money And HP section In the future will be more responsive money system
 
-        public void AddPurseMoreny(int money)
-        {
-            Moreny += money;
-        }
-        public void AddPurseHP(int hp)
-        {
-            Hp += hp;
-        }
-        public void DeletePurseMoreny(int money)
-        {
-            Moreny -= money;
-        }
-        public void DeletePurseHP(int hp)
-        {
-            Hp -= hp;
-        }
+        public void AddPurseMoreny(int money) => Moreny += money;
+        public void AddPurseHP(int hp) => Hp += hp;
+        public void DeletePurseMoreny(int money) => Moreny -= money;
+        public void DeletePurseHP(int hp) => Hp -= hp;
 
         public Dictionary<int, string> orderByKeyMethod()
         {
@@ -147,7 +129,7 @@ namespace ProjectMoren
             }
            
         }
-        public void PlayerMoveSystem(Player player, Graph graph)
+        public void PlayerMoveSystem(PlayerObject player, Graph graph)
         {
             ConsoleKeyInfo keyinfo;
             ConsoleKeyInfo keyinfoTemp;
@@ -238,7 +220,7 @@ namespace ProjectMoren
             } while (keyinfo.Key != ConsoleKey.X);
         }
 
-        public void PlayerPositionSystem(Player player, Graph graph)
+        public void PlayerPositionSystem(PlayerObject player, Graph graph)
         {
             for (int i = 0; i < graph.TotalNumber - 1; i++)
             {
@@ -251,7 +233,7 @@ namespace ProjectMoren
                 }
             }
         }
-        public List<int> PlayerPositionCurrent(Player player, Graph graph)
+        public List<int> PlayerPositionCurrent(PlayerObject player, Graph graph)
         {
             for (int i = 0; i < graph.TotalNumber - 1; i++)
             {
@@ -269,7 +251,7 @@ namespace ProjectMoren
                 }
 
             }
-            return null;
+            return null!;
         }
     }
-}
+

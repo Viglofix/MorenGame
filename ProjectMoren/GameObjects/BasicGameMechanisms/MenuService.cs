@@ -1,23 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http.Headers;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ProjectMoren
-{
-    public class Menu
-    {
-        public int Id { get; set; }
-        public string Name { get; set; }
-
-        public override string ToString()
-        {
-            return $"{Id}. {Name}";
-        }
-    }
+﻿namespace GameObjects.BasicGameMechanisms;
     public class MenuService
     {
         private readonly IEnumerable<Menu> _menus;
@@ -58,4 +39,3 @@ namespace ProjectMoren
             }
         }
     }
-}

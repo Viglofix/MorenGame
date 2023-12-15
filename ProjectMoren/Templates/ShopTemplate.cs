@@ -1,16 +1,13 @@
-﻿using ProjectMoren.Statistics;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ProjectMoren;
+using GameObjects;
+using GameObjects.BasicGameMechanisms;
+using ProjectMoren.StaticClasses;
 
 namespace ProjectMoren.Templates
 {
     public class ShopTemplate
     {
-        public static void ShopMethod(Dictionary<int, string> dic, Player player, LemparsMutlaService lemparsMutlaService, PlayerEquipmentStatistics playerStats, StatisticsForItems statistic)
+        public static void ShopMethod(Dictionary<int, string> dic, PlayerObject player, LemparsMutlaService lemparsMutlaService, PlayerEquipmentStatistics playerStats, StatisticsForItems statistic)
         {
             var m1 = "%%Mutla Lemparu {+10Charisma} -5Moren";
             var m2 = "%%Mutla Lemparu {+20Charisma} -10Moren";

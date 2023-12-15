@@ -1,4 +1,6 @@
-﻿using ProjectMoren.Templates;
+﻿using GameObjects;
+using GameObjects.BasicGameMechanisms;
+using ProjectMoren.Templates;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,7 +22,7 @@ namespace ProjectMoren.FirstMap.MorenLocation
             toolsBox[6] = "Siatka_Na_Morliny";
         }
 
-        public void ChiefHome(Player player, QuestServices questServices)
+        public void ChiefHome(PlayerObject player, QuestService questServices)
         {
 
             int boolMlotek;

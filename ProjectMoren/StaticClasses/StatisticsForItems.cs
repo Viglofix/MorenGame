@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProjectMoren.Statistics
+namespace ProjectMoren.StaticClasses
 {
     public class StatisticsDefinition
     {

@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GameObjects;
 
 namespace ProjectMoren.Templates
 {
     public static class Box
     {
-        public static void BoxMethod(Dictionary<int, string> dic, Player player)
+        public static void BoxMethod(Dictionary<int, string> dic, PlayerObject player)
         {
             string? agreement;
             string? item;
