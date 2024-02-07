@@ -1,3 +1,5 @@
+using System.Text.Json.Serialization;
+
 public class Quest
     {
         public int Id { get; set; }

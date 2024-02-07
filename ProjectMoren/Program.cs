@@ -5,8 +5,6 @@ using ProjectMoren.StaticClasses;
 using GameCommandManager;
 using ProjectMoren.FirstMap.MorenLocation;
 using Newtonsoft.Json;
-using System.IO.Compression;
-using SaveLoadManager;
 
 namespace ProjectMoren;
 
@@ -60,6 +58,7 @@ public class Program
 
         // Serialization
         RootObject obj = new();
+        Quest quest = new();
 
         // Menu Section
         var menuService = new MenuService(MenuService.CreateMenus());
@@ -159,8 +158,8 @@ public class Program
         {
             Console.Write("> ");
             q = Console.ReadLine();
-            manager?.CommandManagerMethod(q!,obj.questService!,obj.moren!,statistic,PlayerEq,allMorenLocations,graph,graphMoren,obj,ref obj);
-            if(q == "load"){
+            manager?.CommandManagerMethod(q!,quest!,obj.moren!,statistic,PlayerEq,allMorenLocations,graph,graphMoren,obj,ref obj);
+            if(q == "load2"){
                obj = manager?.LoadMng()!;
             }
         } while (q != "quit");

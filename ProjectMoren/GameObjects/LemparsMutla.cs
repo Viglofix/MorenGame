@@ -1,4 +1,6 @@
-﻿namespace GameObjects;
+﻿using System.Text.Json.Serialization;
+
+namespace GameObjects;
     public class LemparsMutla 
     {
         public int Id { get; set; }
@@ -13,9 +15,17 @@
     public class LemparsMutlaService
     {
         // pozostalosci po probie z "lock" private readonly object mutlasLock = new object();
-        public List<LemparsMutla> mutlas { get; set; } = new();
+        public List<LemparsMutla> mutlas { get; set; } 
         private readonly object _SyncObj = new object();
         private static int methodCounter = 0;
+        
+        [JsonConstructor]
+        public LemparsMutlaService(List<LemparsMutla> mutlasX) {
+            mutlas = mutlasX;
+        }
+        public LemparsMutlaService(){
+            mutlas = new();
+        }
 
         public void Add(int number)
         {

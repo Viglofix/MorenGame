@@ -29,7 +29,7 @@ public class CommandManager {
                     });
                     action.Invoke();
                     break;
-                case "loadx":
+                case "load":
                  /*   playerSerializedSecond = File.ReadAllText(@"D:\ProjektMoren\playerSerialized.json");
                     playerDeserialized = JsonConvert.DeserializeObject<Player>(playerSerializedSecond);
                     player = playerDeserialized; */

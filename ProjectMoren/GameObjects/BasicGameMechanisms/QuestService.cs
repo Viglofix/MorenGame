@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 
 namespace GameObjects.BasicGameMechanisms;
-    public class QuestService : Quest
+    public class QuestService
     {
         public QuestService()
         {

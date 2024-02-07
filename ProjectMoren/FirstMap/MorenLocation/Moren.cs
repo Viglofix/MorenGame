@@ -62,7 +62,7 @@ public class Moren : Shed
         int pick;
         string? enter;
         int enterInt;
-
+        
         if (questServices.GetQuestByName("Udaj sie do szopy {Home}") != null)
         {
             questServices.DeleteQuest(questServices.GetQuestByName("Udaj sie do szopy {Home}").Id);

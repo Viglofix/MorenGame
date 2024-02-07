@@ -13,8 +13,7 @@
     ],
     "equipment": {
       "0": "Miotla",
-      "1": "Swinka_Maskotka",
-      "2": "Zardzewiala_Siekiera"
+      "1": "Swinka_Maskotka"
     },
     "number": 0,
     "enterToLocation": null,
@@ -25,7 +24,9 @@
     "MutlaTime": 0
   },
   "moren": {
-    "_shedItems": [],
+    "_shedItems": [
+      "Zardzewiala_Siekiera"
+    ],
     "MARKSEnterPossibility": true,
     "DeathAgreement": true,
     "NoAgreementToDeathPossibility": true,
@@ -47,9 +48,13 @@
         "Id": 3,
         "Name": "Glowny Cel: Oddaj 100Morenow {PopilinBasement}"
       }
-    ],
-    "Id": 0,
-    "Name": null
+    ]
+  },
+  "lemparsMutlaService": {
+    "mutlas": []
+  }
+}
+    ]
   },
   "lemparsMutlaService": {
     "mutlas": []
