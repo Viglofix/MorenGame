@@ -1,7 +1,9 @@
 ﻿using System.Linq;
+using GameObjects;
+using GameObjects.BasicGameMechanisms;
 using Newtonsoft.Json;
 using ProjectMoren.FirstMap.MorenLocation.Enemies;
-using ProjectMoren.Statistics;
+using ProjectMoren.StaticClasses;
 using ProjectMoren.Templates;
 
 namespace ProjectMoren.FirstMap.MorenLocation;
@@ -50,7 +52,7 @@ public class Moren : Shed
         this.possibilityBasementSafeOption = possibilityBasementSafeOption;
     }
 
-    public void FiflinsShed(Player player, Quest quest, QuestServices questServices, LemparsMutlaService lemparsMutlaService)
+    public void FiflinsShed(PlayerObject player, Quest quest, QuestService questServices, LemparsMutlaService lemparsMutlaService)
     {
         // var miotla = _shedItems.FindIndex(x => x == "miotla");
         // var swinka = _shedItems.FindIndex(x => x == "swinka maskotka");
@@ -60,7 +62,7 @@ public class Moren : Shed
         int pick;
         string? enter;
         int enterInt;
-
+        
         if (questServices.GetQuestByName("Udaj sie do szopy {Home}") != null)
         {
             questServices.DeleteQuest(questServices.GetQuestByName("Udaj sie do szopy {Home}").Id);
@@ -406,7 +408,7 @@ public class Moren : Shed
         player.AdjustDictionaryIndexes(player.Equipment);
 
     }
-    public void TitalinHouse(Player player, PlayerEquipmentStatistics playerStats, IEnemy ges, QuestServices questServices)
+    public void TitalinHouse(PlayerObject player, PlayerEquipmentStatistics playerStats, IEnemy ges, QuestService questServices)
     {
         string? agreement;
         bool IntAgreement;

@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Numerics;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Reflection;
+using GameObjects;
 
-namespace ProjectMoren.Statistics
-{
+namespace ProjectMoren.StaticClasses;
     public class PlayerEquipmentStatistics : StatisticsForItems
     {
 
@@ -18,7 +11,7 @@ namespace ProjectMoren.Statistics
 
         public List<StatisticsForItems> Statistics { get; set; } = new();
 
-        public void ComparePlayerEquipmentAndStatisticsForItem(Player player)
+        public void ComparePlayerEquipmentAndStatisticsForItem(PlayerObject player)
         {
             List<string> item = new List<string>();
             foreach (var itemX in GetT<StatisticsForItems>())
@@ -54,7 +47,7 @@ namespace ProjectMoren.Statistics
             }
         }
         // Veresion of code above but the only diffrence is that there's a price variable is concerned
-        public void ComparePlayerEquipmentAndStatisticsForItemAndValuesPRICE(Player player, StatisticsForItems stat)
+        public void ComparePlayerEquipmentAndStatisticsForItemAndValuesPRICE(PlayerObject player, StatisticsForItems stat)
         {
             List<string> item = new List<string>();
             foreach (var itemX in GetT<StatisticsForItems>())
@@ -78,7 +71,7 @@ namespace ProjectMoren.Statistics
             }
         }
 
-        public void IterateStatistics(Player player)
+        public void IterateStatistics(PlayerObject player)
         {
             DisplayPropertyNames<StatisticsForItems>();
             //foreach(var property in GetT<StatisticsForItems>())
@@ -113,7 +106,6 @@ namespace ProjectMoren.Statistics
             {
                 Console.WriteLine("Podaj wartosc z zakresu!");
             }
-            return default;
+            return default!;
         }
     }
-}

@@ -1,10 +1,7 @@
-﻿using ProjectMoren.Statistics;
+﻿using GameObjects;
+using GameObjects.BasicGameMechanisms;
+using ProjectMoren.StaticClasses;
 using ProjectMoren.Templates;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ProjectMoren.FirstMap.MorenLocation
 {
@@ -26,7 +23,7 @@ namespace ProjectMoren.FirstMap.MorenLocation
 
         }
 
-        public void Judaflin(Player player, QuestServices questServices, LemparsMutlaService lemparsMutlaService, PlayerEquipmentStatistics playerStats, StatisticsForItems statistic)
+        public void Judaflin(PlayerObject player, QuestService questServices, LemparsMutlaService lemparsMutlaService, PlayerEquipmentStatistics playerStats, StatisticsForItems statistic)
         {
             if (FirstTime == true)
             {

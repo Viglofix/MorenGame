@@ -1,10 +1,12 @@
-﻿namespace ProjectMoren.FirstMap.MorenLocation
+﻿using GameObjects;
+
+namespace ProjectMoren.FirstMap.MorenLocation
 {
     public class AllMorenLocations
     {
         public bool playerPositionFlag { get; set; } = true;
 
-        public void PlayerMoveSystem(Player player, Graph graphMoren)
+        public void PlayerMoveSystem(PlayerObject player, Graph graphMoren)
         {
             ConsoleKeyInfo keyinfo;
             ConsoleKeyInfo keyinfoTemp;
@@ -194,7 +196,7 @@
             } while (keyinfo.Key != ConsoleKey.X);
         }
 
-        public void PlayerPositionSystemMoren(Player player, Graph graphMoren)
+        public void PlayerPositionSystemMoren(PlayerObject player, Graph graphMoren)
         {
             for (int i = 0; i < graphMoren.TotalNumber - 1; i++)
             {

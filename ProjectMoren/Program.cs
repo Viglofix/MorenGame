@@ -1,14 +1,10 @@
-﻿using System.Text.Json.Serialization;
-using Newtonsoft.Json;
-using System.Media;
-using System.Diagnostics;
-using System.Runtime.InteropServices;
-using Castle.DynamicProxy;
-using ProjectMoren.FirstMap.MorenLocation.Enemies.EnemiesBaseElderyEntities;
-using ProjectMoren.Templates;
-using ProjectMoren.FirstMap.MorenLocation.Enemies;
+﻿using System.Runtime.InteropServices;
+using GameObjects;
+using GameObjects.BasicGameMechanisms;
+using ProjectMoren.StaticClasses;
+using GameCommandManager;
 using ProjectMoren.FirstMap.MorenLocation;
-using ProjectMoren.Statistics;
+using Newtonsoft.Json;
 
 namespace ProjectMoren;
 
@@ -61,39 +57,8 @@ public class Program
         graphMoren.AddEdges(4, 5);
 
         // Serialization
-        string playerSerialized;
-        string morenSerialized;
-        string gesSerialized;
-        string questSerialized;
-        string lemparsMutlaServiceSerialized;
-        string morenChiefHomeSerialized;
-
-        string playerSerializedSecond;
-        Player playerDeserialized;
-
-        string morenSerializedSecond;
-        Moren morenDeserialized;
-
-        string gesSerializedSecond;
-        Ges gesDeserialized;
-        
-        string questSerializedSecond;
-        QuestServices questDeserialized;
-
-        string lemparsSerializedSecond;
-        LemparsMutlaService lemparsMutlaServiceDeserialized;
-
-        string morenChiefHomeSerializedSecond;
-        MorenChiefHome morenChiefHomeDeserialized;
-
-
-        // QuestManager
-        QuestServices questService = new();
+        RootObject obj = new();
         Quest quest = new();
-
-        // Mutla System
-
-        LemparsMutlaService lemparsMutlaService = new();
 
         // Menu Section
         var menuService = new MenuService(MenuService.CreateMenus());
@@ -101,22 +66,18 @@ public class Program
         MenuService.ShowMenus(menus);
 
         // Map Section
-
-        var moren = new Moren();
-
+        AllMorenLocations allMorenLocations = new();
         // PlayersObcjest Section
-        var player = new Player();
         var PlayerEq = new PlayerEquipmentStatistics();
         var statistic = new StatisticsForItems();
-        var ges = new Ges();
-        var allMorenLocations = new AllMorenLocations();
 
         // Game Working
-        string q;
+        string? q;
         int p;
+        CommandManager manager = new();
 
-        player.PlayerPosition = graph.getVertexIndex(0);
-        player.PlayerPositionMoren = graphMoren.getVertexIndex(0);
+        obj.playerObject!.PlayerPosition = graph.getVertexIndex(0);
+        obj.playerObject!.PlayerPositionMoren = graphMoren.getVertexIndex(0);
 
         var settings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
 
@@ -164,33 +125,16 @@ public class Program
                         //Console.WriteLine();
                         //Console.WriteLine("!Mozesz udac sie do szopy Fiflina {Home}. Za pomoca polecenia quest mozesz sprawdzic aktualna liste zadan!");
                         //Console.WriteLine("!Mozesz udac sie do Wodza Moren {Chief}. Za pomoca polecenia quest mozesz sprawdzic aktualna liste zadan!");
-                        questService.AddQuest("Udaj sie do szopy {Home}");
-                        questService.AddQuest("Udaj sie do Wodza {Chief}");
-                        questService.AddQuest("Glowny Cel: Oddaj 100Morenow {PopilinBasement}");
+                        obj.questService!.AddQuest("Udaj sie do szopy {Home}");
+                        obj.questService!.AddQuest("Udaj sie do Wodza {Chief}");
+                        obj.questService!.AddQuest("Glowny Cel: Oddaj 100Morenow {PopilinBasement}");
 
                         break;
                     case 2:
                         Console.WriteLine("Wczytano!");
-                        playerSerializedSecond = File.ReadAllText(@"D:\ProjektMoren\playerSerialized.json");
+                       /* playerSerializedSecond = File.ReadAllText(@"D:\ProjektMoren\playerSerialized.json");
                         playerDeserialized = JsonConvert.DeserializeObject<Player>(playerSerializedSecond);
-                        player = playerDeserialized;
-
-                        morenSerializedSecond = File.ReadAllText(@"D:\ProjektMoren\moren.json");
-                        morenDeserialized = JsonConvert.DeserializeObject<Moren>(morenSerializedSecond);
-                        moren = morenDeserialized;
-
-                        gesSerializedSecond = File.ReadAllText(@"D:\ProjektMoren\ges.json");
-                        gesDeserialized = JsonConvert.DeserializeObject<Ges>(gesSerializedSecond);
-                        ges = gesDeserialized;
-
-                        questSerializedSecond = File.ReadAllText(@"D:\ProjektMoren\quest.json");
-                        questDeserialized = JsonConvert.DeserializeObject<QuestServices>(questSerializedSecond);
-                        questService = questDeserialized;
-
-                        lemparsSerializedSecond = File.ReadAllText(@"D:\ProjektMoren\lempar.json");
-                        lemparsMutlaServiceDeserialized = JsonConvert.DeserializeObject<LemparsMutlaService>(lemparsSerializedSecond);
-                        lemparsMutlaService = lemparsMutlaServiceDeserialized;
-
+                        player = playerDeserialized; */
                         break;
                     case 3:
                         Console.WriteLine("Opowiadano!");
@@ -208,149 +152,16 @@ public class Program
         }
         while (p != 1 && p != 2 && p != 3);
 
-        Dictionary<int, string>? dic = new Dictionary<int, string>() { { 0, null! }, { 1, null! }, { 2, null! }, { 3, null! }, { 4, null! }, {5, null! }, { 6, null! }, { 7, null! }, {8, null! } };
-
+      //  Dictionary<int, string>? dic = new Dictionary<int, string>() { { 0, null! }, { 1, null! }, { 2, null! }, { 3, null! }, { 4, null! }, {5, null! }, { 6, null! }, { 7, null! }, {8, null! } };
+        
         do
         {
             Console.Write("> ");
             q = Console.ReadLine();
-            switch (q)
-            {
-                case "PopilinBasement": if(player.Moreny >= 100) { player.Moreny -= 100; Console.WriteLine("Tutaj bedzie dalszy watek"); }; break;
-
-                case "map": player.PlayerMove(graph); break;
-                case "position": player.PlayerPositionSystem(player, graph); break;
-                case "moveSystem": player.PlayerMoveSystem(player, graph); break;
-                case "moveSystemMoren": allMorenLocations.PlayerMoveSystem(player, graphMoren); break;
-                case "positionSystemMoren": allMorenLocations.PlayerPositionSystemMoren(player, graphMoren); break;
-                case "save":
-
-                    playerSerialized = JsonConvert.SerializeObject(player);
-                    File.WriteAllText(@"D:\ProjektMoren\playerSerialized.json", playerSerialized);
-
-                    morenSerialized = JsonConvert.SerializeObject(moren);
-                    File.WriteAllText(@"D:\ProjektMoren\moren.json", morenSerialized);
-
-                    gesSerialized = JsonConvert.SerializeObject(ges);
-                    File.WriteAllText(@"D:\ProjektMoren\ges.json", gesSerialized);
-
-                    questSerialized = JsonConvert.SerializeObject(questService);
-                    File.WriteAllText(@"D:\ProjektMoren\quest.json", questSerialized);
-
-                    lemparsMutlaServiceSerialized = JsonConvert.SerializeObject(lemparsMutlaService);
-                    File.WriteAllText(@"D:\ProjektMoren\lempar.json", lemparsMutlaServiceSerialized);
-
-                    break;
-                case "load":
-
-                    playerSerializedSecond = File.ReadAllText(@"D:\ProjektMoren\playerSerialized.json");
-                    playerDeserialized = JsonConvert.DeserializeObject<Player>(playerSerializedSecond);
-                    player = playerDeserialized;
-
-                    morenSerializedSecond = File.ReadAllText(@"D:\ProjektMoren\moren.json");
-                    morenDeserialized = JsonConvert.DeserializeObject<Moren>(morenSerializedSecond);
-                    moren = morenDeserialized;
-                    
-                    gesSerializedSecond = File.ReadAllText(@"D:\ProjektMoren\ges.json");
-                    gesDeserialized = JsonConvert.DeserializeObject<Ges>(gesSerializedSecond);
-                    ges = gesDeserialized;
-
-                    questSerializedSecond = File.ReadAllText(@"D:\ProjektMoren\quest.json");
-                    questDeserialized = JsonConvert.DeserializeObject<QuestServices>(questSerializedSecond);
-                    questService = questDeserialized;
-
-                    lemparsSerializedSecond = File.ReadAllText(@"D:\ProjektMoren\lempar.json");
-                    lemparsMutlaServiceDeserialized = JsonConvert.DeserializeObject<LemparsMutlaService>(lemparsSerializedSecond);
-                    lemparsMutlaService = lemparsMutlaServiceDeserialized;
-
-                    break;
-                case "eq":
-                    player!.IterateThroughTheEquipment(); break;
-                case "eqShed": moren!.ShowShedItems(); break;
-                case "stat": PlayerEq.IterateStatistics(player!); break;
-                case "compare": PlayerEq.ComparePlayerEquipmentAndStatisticsForItem(player!); break;
-                case "compareAll": PlayerEq.ComparePlayerEquipmentAndStatisticsForItemAndValues(PlayerEq); break;
-                case "gesHp": Console.WriteLine(); break;
-                case "playerHp": Console.WriteLine(player!.GetHp()); break;
-                case "playerCharisma": Console.WriteLine(player!.GetCharism()); break;
-                case "playerPunch": Console.WriteLine(player!.GetPunch()); break;
-                case "playerMoreny": Console.WriteLine(player!.GetMoreny()); break;
-                case "AddMoreny": player.Moreny += 50; break;
-                case "abs": player!.GetAllAbilities(); break;
-                case "counter": Console.WriteLine(EnemiesBase.counter); break;
-                case "quest": questService!.GetAllQuests(); break;
-                case "questAdd": questService!.AddQuest("QuestTest1"); break;
-                case "questDelete": questService!.DeleteQuest(questService._quests.Count); break;
-                case "DrinkMutla": lemparsMutlaService!.DrinkMutlaAsync(player!, lemparsMutlaService.mutlas.Count); break;
-                case "timer": lemparsMutlaService!.GetMutlaTime(player!); break;
-                case "DrinkAdd": lemparsMutlaService!.Add(10); break;
-                case "DrinkDelete": Console.WriteLine(lemparsMutlaService!.DeleteMutla(lemparsMutlaService.mutlas.Count)); break;
-                case "GetAllMutlas": lemparsMutlaService!.GetAllMutlas(); break;
-                case "Box":
-                    Box.BoxMethod(dic, player!); 
-                    break;
-                case "BoxAll":
-                    Box.GetBoxAll(dic); break;
-
+            manager?.CommandManagerMethod(q!,quest!,obj.moren!,statistic,PlayerEq,allMorenLocations,graph,graphMoren,obj,ref obj);
+            if(q == "load2"){
+               obj = manager?.LoadMng()!;
             }
-            // Method SequenceEqual compares two Lists according to the value -- it is the Linq method
-            // Mozemy rowniez posortowac dwie listy w kolejnosci rosnacej dzieki czemu mozemy porowanac dwie listy
-            // gdy sa one nieuporzadkowane. Mozna tez uzyc kolekcji HashSet, ktora usuwa duplikaty
-            // W NASZYM PRZYPADKU korzystamy z tego, poniewaz przy wczytywaniu danych z json ewidentnie
-            // gubimy referencje do naszych obiektow, wiec nie mozemy ich porownac. dlatego porownujemy je za pomoca
-            // sequenceEqual po wartosci elementow [1,2] i [1,2] zwraca true
-
-            if (player.PlayerPosition.SequenceEqual(graph.getVertexIndex(0)) && q == "Home")
-            {
-                moren.FiflinsShed(player, quest, questService, lemparsMutlaService);
-            }
-            if(player.PlayerPosition.SequenceEqual(graph.getVertexIndex(0)) && q == "TitalinHome")
-            {
-                moren.TitalinHouse(player, PlayerEq, ges, questService); 
-            }
-            if(player.PlayerPosition.SequenceEqual(graph.getVertexIndex(0)) && q == "MARKS")
-            {
-                moren.MARKSFight(player, moren, ges, PlayerEq, questService);
-            }
-            if (player.PlayerPosition.SequenceEqual(graph.getVertexIndex(0)) && q == "Chief")
-            {
-                moren.ChiefHome(player, questService);
-            } 
-            if (player.PlayerPosition.SequenceEqual(graph.getVertexIndex(0)) && q == "MorenArmorShop")
-            {
-                moren.Judaflin(player, questService, lemparsMutlaService, PlayerEq, statistic);
-            }
-
-            // I KNOW THAT IT IS A FUCKING CODE REDUNDANCY BUT WHO CARES
-            // This section is for the Moren Location movment and invoking things
-
-            if(q == "!enter")
-            {
-                if (player.PlayerPositionMoren.SequenceEqual(graphMoren.getVertexIndex(0)))
-                {
-                    moren.FiflinsShed(player, quest, questService, lemparsMutlaService);
-                }
-                if (player.PlayerPositionMoren.SequenceEqual(graphMoren.getVertexIndex(1)))
-                {
-                    moren.TitalinHouse(player, PlayerEq, ges, questService);
-                }
-                if (player.PlayerPositionMoren.SequenceEqual(graphMoren.getVertexIndex(2)))
-                {
-                }
-                if (player.PlayerPositionMoren.SequenceEqual(graphMoren.getVertexIndex(3)))
-                {
-                    moren.Judaflin(player, questService, lemparsMutlaService, PlayerEq, statistic);
-                }
-                if (player.PlayerPositionMoren.SequenceEqual(graphMoren.getVertexIndex(4)))
-                {
-                    moren.ChiefHome(player, questService);
-                } 
-                if (player.PlayerPositionMoren.SequenceEqual(graphMoren.getVertexIndex(5)))
-                {
-                    moren.MARKSFight(player, moren, ges, PlayerEq, questService);
-                }
-            }
-
         } while (q != "quit");
 
     }

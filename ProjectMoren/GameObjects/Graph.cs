@@ -1,4 +1,4 @@
-namespace ProjectMoren;
+namespace GameObjects;
 
 public class Graph
 {

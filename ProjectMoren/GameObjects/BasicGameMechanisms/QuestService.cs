@@ -1,37 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
-namespace ProjectMoren
-{
-    public class Quest
+namespace GameObjects.BasicGameMechanisms;
+    public class QuestService
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
-
-        public override string ToString()
+        public QuestService()
         {
-            return $"{Id}. {Name}";
-        }
-    }
-    public class QuestServices : Quest
-    {
-        public QuestServices()
-        {
-
+           _quests = new();
         }
 
         [JsonConstructor]
-        public QuestServices(List<Quest> quests)
+        public QuestService(List<Quest> quests)
         {
             _quests = quests;
         }
 
-        public List<Quest> _quests { get; set; } = new List<Quest>(); 
+        public List<Quest> _quests { get; set; }  
 
         public void AddQuest(string QuestDesctiption)
         {
@@ -96,5 +79,3 @@ namespace ProjectMoren
             return null;
         }
     }
-
-} 
